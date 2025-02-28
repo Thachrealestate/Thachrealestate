@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ThachReal Estate</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Global Styles */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Navbar */
+        header {
+            background-color: #ffffff;
+            padding: 20px 10%;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        nav .logo h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            padding: 0;
+        }
+
+        nav ul li a {
+            color: #333;
+            font-size: 16px;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #007bff;
+        }
+
+        .cta-nav {
+            background-color: #007bff;
+            padding: 10px 20px;
+            border-radius: 30px;
+            color: white;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-nav:hover {
+            background-color: #0056b3;
+        }
+
+        /* Responsive Navbar */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                flex-direction: column;
+                background: #ffffff;
+                position: absolute;
+                top: 70px;
+                right: 0;
+                width: 100%;
+                padding: 20px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: flex;
+                flex-direction: column;
+                cursor: pointer;
+            }
+
+            .menu-toggle .bar {
+                width: 25px;
+                height: 3px;
+                background-color: #333;
+                margin: 4px 0;
+                transition: all 0.3s ease;
+            }
+        }
+
+        /* Property Detail Section */
+        .property-detail {
+            padding: 120px 10% 40px;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .property-detail .info {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: #f1f1f1;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            color: #444;
+        }
+
+        .property-detail .info h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .property-detail .info p {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 30px;
+            background-color: #007bff;
+            color: white;
+            font-weight: 600;
+            border-radius: 30px;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            padding: 80px 10%;
+            background-color: #f8f8f8;
+        }
+
+        .gallery-section h3 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 50px 10%;
+            text-align: left;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .footer-logo {
+            width: 25%;
+        }
+
+        .footer-logo h3 {
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .footer-logo p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .footer-links h4 {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            margin-bottom: 10px;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links ul li a:hover {
+            color: #007bff;
+        }
+
+        .footer-contact {
+            width: 25%;
+        }
+
+        .footer-contact h4 {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+        }
+
+        /* Image Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 12px;
+        }
+
+        .modal .close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            color: #fff;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>ThachReal Estate</h1>
+            </div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="index.html" class="cta-nav">Back</a></li>
+            </ul>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+    
+    <!-- Property Detail Section -->
+    <section class="property-detail">
+              <div class="info">
+            <h2>Luxury Villa</h2>
+            <p><strong>Price:</strong> $1,099,900</p>
+            <p><strong>Location:</strong> 7021 Olson Memorial Hwy, Golden Valley, MN 55427</p>
+            <p><strong>Details:</strong> 5 Beds, 4 Baths, 3,682  sq ft</p>
+            <p><strong>Description:</strong> This luxury 5-bedroom, 4-bathroom home offers 4 bedrooms upstairs, a main floor office, and a 3-car heated garage. The modern exterior features a covered porch, high-end Pella windows, and a spacious TimberTech deck with gas lines for a fireplace and grill. Inside, enjoy luxurious finishes and custom upgrades throughout. The lower level includes a wet bar for entertaining. Ideally located near Golden Valley’s downtown, Good Shepherd School, parks, golf courses, and dining options, this home combines style, convenience, and sophisticated living.</p>
+
+            <a href="index.html" class="cta-btn">Back to Home</a>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <h3 style="text-align: center; font-size: 36px; margin-top: 50px; font-weight: 600;">Property Gallery</h3>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="img/g11.jpeg" alt="Property Image 1" onclick="showImage(this.src)">
+            </div>
+            <div class="gallery-item">
+                <img src="img/g1.jpeg" alt="Property Image 2" onclick="showImage(this.src)">
+            </div>
+            <div class="gallery-item">
+                <img src="img/g2.jpeg" alt="Property Image 3" onclick="showImage(this.src)">
+            </div>
+            <div class="gallery-item">
+                <img src="img/g3.jpeg" alt="Property Image 4" onclick="showImage(this.src)">
+            </div>
+            <div class="gallery-item">
+                <img src="img/g5.jpeg" alt="Property Image 5" onclick="showImage(this.src)">
+            </div>
+             <div class="gallery-item">
+                <img src="img/g6.jpeg" alt="Property Image 5" onclick="showImage(this.src)">
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Modal for Full View -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">×</span>
+        <img id="fullImage" src="" alt="Full View">
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-logo">
+                <h3>ThachReal Estate</h3>
+                <p>Your trusted partner in finding your dream home.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p><strong>Email:</strong> Thachrealestate.ceo@gmail.com</p>
+                <p><strong>Phone:</strong> +1 724 638 7440</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 ThachReal Estate. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Function to show the clicked image in full view
+        function showImage(src) {
+            const modal = document.getElementById("imageModal");
+            const fullImage = document.getElementById("fullImage");
+            fullImage.src = src;
+            modal.style.display = "flex";
+        }
+
+        // Function to close the image modal
+        function closeModal() {
+            const modal = document.getElementById("imageModal");
+            modal.style.display = "none";
+        }
+
+        // Mobile menu toggle
+        const mobileMenu = document.getElementById("mobile-menu");
+        const navLinks = document.querySelector("nav ul");
+
+        mobileMenu.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+            mobileMenu.classList.toggle("active");
+        });
+    </script>
+</body>
+</html>
